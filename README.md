@@ -27,9 +27,15 @@ Place all of the files in `train-dataset` to `checkpoints\mmgraph`.
 Place all of the files in `test-dataset` to `data\test_data`.
 
 ## Simple usage
-You can regenerate our model's results using the commands below:
+#### You can regenerate our model's results using the commands below.
+
+For training:
 ```
 python trial_train.py
+```
+For testing:
+```
+python trial_data_3.py
 ```
 
 
