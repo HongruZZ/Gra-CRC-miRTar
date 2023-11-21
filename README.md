@@ -28,6 +28,8 @@ Place all of the files in `test-dataset` to `data\test_data`.
 
 ## Simple usage
 You can regenerate our model's results using the commands below:
-    python trial_train.py
+```
+python trial_train.py
+```
 
 
