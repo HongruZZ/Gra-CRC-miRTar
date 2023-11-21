@@ -11,3 +11,19 @@ The pre-training nucleotide-to-graph neural networks to identify potential miRNA
     tqdm==4.62.3
     pandas==2.0.2
     scipy==1.10.1
+
+# Usage
+
+## Before running the codes
+#### Please download the [supplement materials] for the codes (https://drive.google.com/drive/folders/1caGodK_1220YXQfKSLjHIvi87VBRau97?usp=drive_link).
+Place all of the files in `pairfeatures` folder to `/checkpoints/Pair_feature`
+Place all of the files in `pre-train-dataset/mirna_mammal` to `data preprocessing/New_data/mirna_mammal`
+Place all of the files in `pre-train-dataset/mrna_mammal` to `data preprocessing/New_data/mrna_mammal`
+Place all of the files in `train-dataset` to `checkpoints\mmgraph`
+Place all of the files in `test-dataset` to `data\test_data`
+
+## Simple usage
+You can regenerate our model's results using the commands below:
+    python trial_train.py
+
+
