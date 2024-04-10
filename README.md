@@ -10,7 +10,7 @@ pip install -r requirements.txt
 # Usage
 
 ## Before running the codes
-#### Please download the [supplement materials](https://drive.google.com/drive/folders/1caGodK_1220YXQfKSLjHIvi87VBRau97?usp=drive_link) for the codes.
+#### Please download the [supplemental materials](https://drive.google.com/drive/folders/1caGodK_1220YXQfKSLjHIvi87VBRau97?usp=drive_link) for the codes.
 Place all of the files in `pairfeatures` folder to `/checkpoints/Pair_feature`.
 
 Place all of the files in `pre-train-dataset/mirna_mammal` to `data preprocessing/New_data/mirna_mammal`.
