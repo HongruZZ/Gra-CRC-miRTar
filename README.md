@@ -1,7 +1,7 @@
 # Gra-CRC-miRTar
 The pre-training nucleotide-to-graph neural networks to identify potential miRNA-mRNA interactions in colorectal cancer patients
 
-[Diagram](code/visualization/Workflow Diagram.jpg)
+![image](https://github.com/HongruZZ/CRCGraph/blob/main/code/visualization/Workflow%20Diagram.jpg)
 
 # Requirements
 The codes are tested in Python 3.8.16 and you can install all of the required packages by running the following commands:
