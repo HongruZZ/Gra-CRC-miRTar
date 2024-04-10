@@ -13,24 +13,31 @@ pip install -r requirements.txt
 #### Please download the [supplemental materials](https://drive.google.com/drive/folders/1caGodK_1220YXQfKSLjHIvi87VBRau97?usp=drive_link) for the codes.
 Place all of the files in `pairfeatures` folder to `/checkpoints/Pair_feature`.
 
-Place all of the files in `pre-train-dataset/mirna_mammal` to `data preprocessing/New_data/mirna_mammal`.
+Place all of the files in `/Gra-CRC-miRTar_supplemental_material/pre_train_dataset/mirna_mammal` to `/code/data preprocessing/New_data/mirna_mammal`.
 
-Place all of the files in `pre-train-dataset/mrna_mammal` to `data preprocessing/New_data/mrna_mammal`.
+Place all of the files in `/Gra-CRC-miRTar_supplemental_material/pre_train_dataset/mrna_mammal` to `/code/data preprocessing/New_data/mrna_mammal`.
 
-Place all of the files in `train-dataset` to `checkpoints\mmgraph`.
+Place all of the files in `/Gra-CRC-miRTar_supplemental_material/train_dataset` to `/code/checkpoints/mmgraph`.
 
-Place all of the files in `test-dataset` to `data\test_data`.
+Place all of the files in `/Gra-CRC-miRTar_supplemental_material/test_dataset` to `/code/data/test_data/rna2vec`.
+
+Place all of the files in `/Gra-CRC-miRTar_supplemental_material/extra_validation_dataset` to `/code/data/extra_test_data_201`.
+
 
 ## Simple usage
 #### You can regenerate our model's results using the commands below.
 
 For training:
 ```
-python trial_train.py
+python train.py
 ```
 For testing:
 ```
-python trial_data_3.py
+python test.py
+```
+For extra validation:
+```
+python extra_validation.py
 ```
 
 
