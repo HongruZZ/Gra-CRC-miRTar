@@ -1,4 +1,4 @@
-# CRCGraph
+# Gra-CRC-miRTar
 The pre-training nucleotide-to-graph neural networks to identify potential miRNA-mRNA interactions in colorectal cancer patients
 
 # Requirements
