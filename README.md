@@ -1,41 +1,43 @@
-# CRCGraph
+# Gra-CRC-miRTar
 The pre-training nucleotide-to-graph neural networks to identify potential miRNA-mRNA interactions in colorectal cancer patients
 
 # Requirements
-    python==3.8
-    torch==1.12.0+cu113
-    dgl==1.1.1+cu113
-    scikit-learn==1.0.1
-    numpy==1.24.4
-    gensim==4.1.2
-    tqdm==4.62.3
-    pandas==2.0.2
-    scipy==1.10.1
+The codes are tested in Python 3.8.16 and you can install all of the required packages by running the following commands:
+```
+pip install -r requirements.txt
+```
 
 # Usage
 
 ## Before running the codes
-#### Please download the [supplement materials](https://drive.google.com/drive/folders/1caGodK_1220YXQfKSLjHIvi87VBRau97?usp=drive_link) for the codes.
+#### Please download the [supplemental materials](https://drive.google.com/drive/folders/1caGodK_1220YXQfKSLjHIvi87VBRau97?usp=drive_link) for the codes.
 Place all of the files in `pairfeatures` folder to `/checkpoints/Pair_feature`.
 
-Place all of the files in `pre-train-dataset/mirna_mammal` to `data preprocessing/New_data/mirna_mammal`.
+Place all of the files in `/Gra-CRC-miRTar_supplemental_material/pre_train_dataset/mirna_mammal` to `/code/data preprocessing/New_data/mirna_mammal`.
 
-Place all of the files in `pre-train-dataset/mrna_mammal` to `data preprocessing/New_data/mrna_mammal`.
+Place all of the files in `/Gra-CRC-miRTar_supplemental_material/pre_train_dataset/mrna_mammal` to `/code/data preprocessing/New_data/mrna_mammal`.
 
-Place all of the files in `train-dataset` to `checkpoints\mmgraph`.
+Place all of the files in `/Gra-CRC-miRTar_supplemental_material/train_dataset` to `/code/checkpoints/mmgraph`.
 
-Place all of the files in `test-dataset` to `data\test_data`.
+Place all of the files in `/Gra-CRC-miRTar_supplemental_material/test_dataset` to `/code/data/test_data/rna2vec`.
+
+Place all of the files in `/Gra-CRC-miRTar_supplemental_material/extra_validation_dataset` to `/code/data/extra_test_data_201`.
+
 
 ## Simple usage
 #### You can regenerate our model's results using the commands below.
 
 For training:
 ```
-python trial_train.py
+python train.py
 ```
 For testing:
 ```
-python trial_data_3.py
+python test.py
+```
+For extra validation:
+```
+python extra_validation.py
 ```
 
 
