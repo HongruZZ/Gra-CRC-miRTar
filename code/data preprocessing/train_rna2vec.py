@@ -42,7 +42,7 @@ class Fasta_Sequence_cut:
         self.Max_SeqLength = Max_SeqLength
         self.kmer_low = kmer_low
         self.kmer_high = kmer_high
-        self.kmer_len_counter = Counter() #计算词频
+        self.kmer_len_counter = Counter()
         self.nb_kmers = 0
         self.random_num = np.random.RandomState(123)
         self.fasta_seq = 0
@@ -50,67 +50,65 @@ class Fasta_Sequence_cut:
         self.cut_seq_lengthlist=[]
         self.iter_count = 0
 
-    def SeqGenerator_fastahandle(self): #感觉是用logger时刻记录循环时的情况
+    def SeqGenerator_fastahandle(self):
         for curr_epoch in range(self.epochs):
             for fasta_file in self.fasta_files:
                 with open(fasta_file) as fasta:
                     self.logger.info('Opened file: {}'.format(fasta_file))
-                    #self.logger.info('Memory usage: {} MB'.format(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1E6))
                     self.logger.info('Current epoch: {} / {}'.format(curr_epoch + 1, self.epochs))
-                    yield fasta #yield在这里可以生成一个读取文件的generator
+                    yield fasta
 
-    def SeqGenerator(self): #从fasta中分割出sequence
+    def SeqGenerator(self):
         for fasta_handle in self.SeqGenerator_fastahandle():
             for seq_record in SeqIO.parse(fasta_handle,'fasta'):
-                self.fasta_seq +=1 #fasta squence数加一
-                whole_seq = seq_record.seq #输出的时fasta分段后每个rna的序列
+                self.fasta_seq +=1
+                whole_seq = seq_record.seq
                 self.logger.info('Whole fasta seqlen:{}'.format(len(whole_seq)))
                 cut_seq_stat = 0
                 while cut_seq_stat < len(whole_seq):
                     self.cut_seq +=1
                     seqlen = random.randint(self.Min_SeqLength,self.Max_SeqLength)
-                    #seqlen = len(seq_record.seq)     #miRna长度较短，使用其本身长度作为切割长度
-                    segment = seq_record.seq[cut_seq_stat: cut_seq_stat+seqlen] #截取20-30nt之间的一个随机长度
-                    cut_seq_stat += seqlen #以截取后下一个nt作为起点继续分割
+                    segment = seq_record.seq[cut_seq_stat: cut_seq_stat+seqlen]
+                    cut_seq_stat += seqlen
                     self.logger.debug('Cut seq len:{}'.format(len(segment)))
-                    self.cut_seq_lengthlist.append(len(segment)) #储存每次切分的长度
-                    yield segment #生成切分段的generator
+                    self.cut_seq_lengthlist.append(len(segment))
+                    yield segment
 
     def SlidingKmerFragmenter(self,seq):
-        return [seq[i: i + self.random_num.randint(self.kmer_low, self.kmer_high + 1)] for i in range(len(seq) - self.kmer_high + 1)] #k-mer window sliding, 生成一堆小string
+        return [seq[i: i + self.random_num.randint(self.kmer_low, self.kmer_high + 1)] for i in range(len(seq) - self.kmer_high + 1)]
 
-    def Kmer_Histogram(self,seq): #计算同一个seq里面不同的k-mer的个数，生成一个dictionary
+    def Kmer_Histogram(self,seq):
         for kmer in seq:
             self.kmer_len_counter[len(kmer)] += 1
             self.nb_kmers += 1
 
     def Kmer_stat(self, fptr):
-        for kmer_len in sorted(self.kmer_len_counter.keys()): # 对k-mer中mer的个数进行排序
+        for kmer_len in sorted(self.kmer_len_counter.keys()):
             self.logger.info('Percent of {:2d}-mers: {:3.1f}% ({})'.format(
                 kmer_len,
                 100.0 * self.kmer_len_counter[kmer_len] / self.nb_kmers,
-                self.kmer_len_counter[kmer_len])) #这里每次输出一条链中k-mer相关的统计量，包括百分比和具体数量
+                self.kmer_len_counter[kmer_len]))
         total_bps = sum([l * c for l, c in self.kmer_len_counter.items()])
-        self.logger.info('Number of base-pairs: {}'.format(total_bps)) #这里输出最后的k-mers中包含了多少个nt
+        self.logger.info('Number of base-pairs: {}'.format(total_bps))
 
     def sequence_stat(self,fptr):
-        self.logger.info('Number of fasta sequence: {}'.format(self.fasta_seq)) #输出一共有多少个fasta sequence
-        self.logger.info('After cut Number of sequence: {}'.format(self.cut_seq)) #输出一共被截出多少cutting sequence
+        self.logger.info('Number of fasta sequence: {}'.format(self.fasta_seq))
+        self.logger.info('After cut Number of sequence: {}'.format(self.cut_seq))
         np.savez(args.out_dir+'/cut_seq_length.npz',Cut_Lenght=self.cut_seq_lengthlist)
 
-    def __iter__(self): #使这个对象iterable?
+    def __iter__(self):
         self.iter_count += 1
         for seq in self.SeqGenerator():
-            seq = seq.upper() #变成大写
+            seq = seq.upper()
             if True and self.random_num.rand() < 0.5:
-                seq =  seq.reverse_complement() #sequence变为其翻转过来的互补链
+                seq =  seq.reverse_complement()
 
-            acgt_seq_split = list(filter(bool,re.split(r'[^ACGTacgt]+', str(seq)))) #确保不会存在空的？
+            acgt_seq_split = list(filter(bool,re.split(r'[^ACGTacgt]+', str(seq))))
             for acgt_seq in acgt_seq_split:
-                kmer_seq = self.SlidingKmerFragmenter(acgt_seq) #生成一堆k-mer片段sequence
+                kmer_seq = self.SlidingKmerFragmenter(acgt_seq)
                 if len(kmer_seq) > 0:
                     if self.iter_count ==1:
-                        self.Kmer_Histogram(kmer_seq) #生成一个k-mer distionary
+                        self.Kmer_Histogram(kmer_seq)
                     yield kmer_seq
 
 
@@ -119,12 +117,10 @@ class Learner:
         self.logger = logbook.Logger(self.__class__.__name__)
         self.model = None
         self.outputfile = outputfile
-        # 三个word2vec 参数
         self.context_halfsize =context_halfsize
         self.gensim_iters = gensim_iters
         self.vec_dim =vec_dim
         self.use_skipgram = 1
-        # 日志打印信息
         self.logger.info('Context window half size: {}'.format(self.context_halfsize))
         self.logger.info('Use skipgram: {}'.format(self.use_skipgram))
         self.logger.info('gensim_iters: {}'.format(self.gensim_iters))

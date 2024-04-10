@@ -8,7 +8,7 @@ from sklearn import metrics
 import pylab as plt
 
 
-def ks(y_predicted1, y_true1, y_predicted2, y_true2, y_predicted3, y_true3, y_predicted4, y_true4 , y_predicted5, y_true5, y_predicted6, y_true6, y_predicted7, y_true7, y_predicted8, y_true8):#
+def AUC_pic(y_predicted1, y_true1, y_predicted2, y_true2, y_predicted3, y_true3, y_predicted4, y_true4 , y_predicted5, y_true5, y_predicted6, y_true6, y_predicted7, y_true7, y_predicted8, y_true8):#
     Font = {'size': 12, 'family': 'Times New Roman'}
     Font_title = {'size': 18, 'family': 'Times New Roman'}
 
@@ -58,7 +58,7 @@ def ks(y_predicted1, y_true1, y_predicted2, y_true2, y_predicted3, y_true3, y_pr
     plt.show()
     return abs(fpr1 - tpr1).max(), abs(fpr2 - tpr2).max(), abs(fpr3 - tpr3).max(), abs(fpr5 - tpr5).max(), abs(fpr6 - tpr6).max() #, abs(fpr4 - tpr4).max()
 
-def kt(y_predicted1, y_true1, y_predicted2, y_true2, y_predicted3, y_true3, y_predicted4, y_true4 , y_predicted5, y_true5, y_predicted6, y_true6, y_predicted7, y_true7, y_predicted8, y_true8):#
+def AUPR_pic(y_predicted1, y_true1, y_predicted2, y_true2, y_predicted3, y_true3, y_predicted4, y_true4 , y_predicted5, y_true5, y_predicted6, y_true6, y_predicted7, y_true7, y_predicted8, y_true8):#
     Font = {'size': 12, 'family': 'Times New Roman'}
     Font_title = {'size': 18, 'family': 'Times New Roman'}
 
@@ -72,22 +72,22 @@ def kt(y_predicted1, y_true1, y_predicted2, y_true2, y_predicted3, y_true3, y_pr
     label8 = y_true8
 
 
-    precision_1, recall_1, threshold_1 = precision_recall_curve(label1, y_predicted1)  # 计算Precision和Recall
-    aupr_1 = auc(recall_1, precision_1)  # 计算AUPR值
-    precision_2, recall_2, threshold_2 = precision_recall_curve(label2, y_predicted2)  # 计算Precision和Recall
-    aupr_2 = auc(recall_2, precision_2)  # 计算AUPR值
-    precision_3, recall_3, threshold_3 = precision_recall_curve(label3, y_predicted3)  # 计算Precision和Recall
-    aupr_3 = auc(recall_3, precision_3)  # 计算AUPR值
-    precision_4, recall_4, threshold_4 = precision_recall_curve(label4, y_predicted4)  # 计算Precision和Recall
-    aupr_4 = auc(recall_4, precision_4)  # 计算AUPR值
-    precision_5, recall_5, threshold_5 = precision_recall_curve(label5, y_predicted5)  # 计算Precision和Recall
-    aupr_5 = auc(recall_5, precision_5)  # 计算AUPR值
-    precision_6, recall_6, threshold_6 = precision_recall_curve(label6, y_predicted6)  # 计算Precision和Recall
-    aupr_6 = auc(recall_6, precision_6)  # 计算AUPR值
-    precision_7, recall_7, threshold_7 = precision_recall_curve(label7, y_predicted7)  # 计算Precision和Recall
-    aupr_7 = auc(recall_7, precision_7)  # 计算AUPR值
-    precision_8, recall_8, threshold_8 = precision_recall_curve(label8, y_predicted8)  # 计算Precision和Recall
-    aupr_8 = auc(recall_8, precision_8)  # 计算AUPR值
+    precision_1, recall_1, threshold_1 = precision_recall_curve(label1, y_predicted1)
+    aupr_1 = auc(recall_1, precision_1)
+    precision_2, recall_2, threshold_2 = precision_recall_curve(label2, y_predicted2)
+    aupr_2 = auc(recall_2, precision_2)
+    precision_3, recall_3, threshold_3 = precision_recall_curve(label3, y_predicted3)
+    aupr_3 = auc(recall_3, precision_3)
+    precision_4, recall_4, threshold_4 = precision_recall_curve(label4, y_predicted4)
+    aupr_4 = auc(recall_4, precision_4)
+    precision_5, recall_5, threshold_5 = precision_recall_curve(label5, y_predicted5)
+    aupr_5 = auc(recall_5, precision_5)
+    precision_6, recall_6, threshold_6 = precision_recall_curve(label6, y_predicted6)
+    aupr_6 = auc(recall_6, precision_6)
+    precision_7, recall_7, threshold_7 = precision_recall_curve(label7, y_predicted7)
+    aupr_7 = auc(recall_7, precision_7)
+    precision_8, recall_8, threshold_8 = precision_recall_curve(label8, y_predicted8)
+    aupr_8 = auc(recall_8, precision_8)
 
     plt.figure(figsize=(10, 10))
     plt.plot(precision_1, recall_1, 'b', label='GIN (AUPR = %0.3f)' % aupr_1, color='Red', linewidth=1.5)
@@ -127,6 +127,6 @@ PH_test = np.load('./predict_results/PmliHFM-test.npy')
 PH_pred = np.load('./predict_results/PmliHFM-pred.npy')
 
 #print AUROC
-print(ks(GNN_pred, GNN_test, Premli_pred, Premli_test, CIRNN_pred, CIRNN_test,LM_pred, LM_test, PP_pred, PP_test, PH_pred, PH_test, GCN_pred, GCN_test, GAT_pred, GAT_test))#
+print(AUC_pic(GNN_pred, GNN_test, Premli_pred, Premli_test, CIRNN_pred, CIRNN_test,LM_pred, LM_test, PP_pred, PP_test, PH_pred, PH_test, GCN_pred, GCN_test, GAT_pred, GAT_test))#
 #print AUPRC
-#print(kt(GNN_pred, GNN_test, Premli_pred, Premli_test, CIRNN_pred, CIRNN_test,LM_pred, LM_test, PP_pred, PP_test, PH_pred, PH_test, GCN_pred, GCN_test, GAT_pred, GAT_test))#
+# print(AUPR_pic(GNN_pred, GNN_test, Premli_pred, Premli_test, CIRNN_pred, CIRNN_test,LM_pred, LM_test, PP_pred, PP_test, PH_pred, PH_test, GCN_pred, GCN_test, GAT_pred, GAT_test))#

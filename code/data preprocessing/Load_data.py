@@ -2,17 +2,12 @@ import pandas as pd
 import numpy as np
 import re
 #Load CSV
-#csvpath = ('C:\\UF research\\Code implementation\\Data\\293T_SRR18281057_collapsed_hybrids_dG11.csv')
 csvpath = ('C:\\UF research\\Code implementation\\Data\\EXP_314_dG11.csv')
 
 #Output TXT
-#txtpath = ('C:\\UF research\\Code implementation\\preMLI-main\\Datasets\\Our Dataset\\MiRNA')
 txtpath = ('C:\\UF research\\Code implementation\\preMLI-main\\Datasets\\Our_Dataset')
 
 #Name the file
-#txtname = ('Big_DG11_MiRNA')
-#txtname = ('Small_DG11_MiRNA')
-#txtname = ('Big_DG11_MRNA')
 txtname = ('DG11_true')
 
 
@@ -34,8 +29,6 @@ data1 = data.drop(drop_row_index)
 
 
 
-#Change the column loading
-#loadyouwant = ['miRNA_name', 'miRNA_sequence']
 loadyouwant = ['miRNA_name', 'Gene_ID', 'miRNA_sequence', 'element_sequence','dG']
 loadyoudontwant = ['miRNA_name', 'Gene_ID', 'miRNA_sequence', 'negative_element_1X', 'dG']
 

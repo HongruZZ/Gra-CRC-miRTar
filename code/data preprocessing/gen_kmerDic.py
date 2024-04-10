@@ -4,7 +4,6 @@ import pickle
 from gensim.models import KeyedVectors
 from gensim import models
 from gensim.models import word2vec
-#b = np.load("./Datasets/dictionary/dictionary 2.0/RNA3mers.npy", allow_pickle=True)
 
 file = './results/5-mer-mir-mammal-RNA2vec-20230720-0423-k3to3-128d-4c-1527758Mbp-sliding-Piu.w2v'
 df = pd.read_csv(file,header=None)
@@ -35,7 +34,6 @@ for i in range(1,len(key_list)):
         word_embedding_dic[key_list[i]] = embedding_list[i]
         word_embedding_list.append(key_list[i])
 
-#print(word_embedding_dic)
 
 with open(f'Datasets/dictionary/RNA2VEC_k5_miRNA_mammal.pkl', 'wb') as f:
 
