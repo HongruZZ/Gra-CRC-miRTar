@@ -1,0 +1,1 @@
+The trained GAT models are saved in this folder.

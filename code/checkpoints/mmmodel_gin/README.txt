@@ -1,0 +1,1 @@
+The trained GIN model are saved in this folder.

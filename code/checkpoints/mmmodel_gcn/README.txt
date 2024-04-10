@@ -1,0 +1,1 @@
+The trained GCN model are saved in this folder.
